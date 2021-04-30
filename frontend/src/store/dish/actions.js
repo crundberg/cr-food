@@ -24,6 +24,16 @@ function add(item, redirectTo) {
 	};
 }
 
+function remove(item, redirectTo) {
+	return {
+		type: TYPE.DELETE,
+		payload: {
+			item,
+			redirectTo,
+		},
+	};
+}
+
 function error(e) {
 	return {
 		type: TYPE.ERROR,
@@ -34,6 +44,7 @@ function error(e) {
 export function handleGet() {
 	return async (dispatch) => {
 		dispatch(loading());
+
 		try {
 			const { data } = await apiRequest('/api/dish', 'GET', {}, {});
 			dispatch(get(data));
@@ -43,17 +54,26 @@ export function handleGet() {
 	};
 }
 
-export function handleAdd(placeId, comment, rating) {
+export function handleAdd(item) {
 	return async (dispatch) => {
-		try {
-			const item = {
-				placeId,
-				comment,
-				rating,
-			};
+		dispatch(loading());
 
-			const result = await apiRequest('/api/dish', 'post', {}, item);
-			dispatch(add(result, '/'));
+		try {
+			const { data } = await apiRequest('/api/dish', 'post', {}, item);
+			dispatch(add(data, '/'));
+		} catch (e) {
+			dispatch(error(e.response.data));
+		}
+	};
+}
+
+export function handleRemove(id) {
+	return async (dispatch) => {
+		dispatch(loading());
+
+		try {
+			const result = await apiRequest(`/api/dish/${id}`, 'delete');
+			dispatch(remove(result, '/'));
 		} catch (e) {
 			dispatch(error(e.response.data));
 		}

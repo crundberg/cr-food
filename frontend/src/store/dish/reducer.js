@@ -31,7 +31,15 @@ export default (state = initialState, action) => {
 		case TYPE.ADD:
 			return {
 				...state,
-				// items: [action.payload.item, ...state.items],
+				items: [action.payload.item, ...state.items],
+				redirectTo: action.payload.redirectTo,
+			};
+		case TYPE.DELETE:
+			return {
+				...state,
+				items: [
+					...state.items.filter((item) => item.id !== action.payload.item.id),
+				],
 				redirectTo: action.payload.redirectTo,
 			};
 		default: {

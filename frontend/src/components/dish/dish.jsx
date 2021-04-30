@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDish } from 'hooks';
 import DishTableHeader from './dishTableHeader';
 import DishTableRow from './dishTableRow';
@@ -9,12 +9,16 @@ function Dish() {
 	const { items, handleGet } = useDish();
 
 	useEffect(() => {
-		// handleGet();
+		handleGet();
 	}, []);
 
 	return (
 		<main className="container">
 			<h1>Dishes</h1>
+
+			<Link to="/dish/add" className="btn btn-primary">
+				Add
+			</Link>
 
 			<table className="table table-striped table-hover table-responsive-md align-middle">
 				<DishTableHeader />

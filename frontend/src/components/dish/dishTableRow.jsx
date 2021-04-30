@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDish } from 'hooks';
 
 function DishTableRow({ item }) {
+	const { handleRemove } = useDish();
 	const { id, name, tags } = item;
+
+	const handleDelete = async () => {
+		if (window.confirm(`Are you sure you want delete ${name}?`)) {
+			handleRemove(id);
+		}
+	};
 
 	return (
 		<tr>
@@ -12,14 +20,18 @@ function DishTableRow({ item }) {
 			<td>
 				<div className="btn-group">
 					<button type="button" className="btn btn-outline-success">
-						<i className="fas fa-play" />
+						<i className="far fa-eye" />
 					</button>
 					<a href="/" className="btn btn-outline-primary">
 						<i className="far fa-edit" />
 					</a>
-					<a href="/" className="btn btn-outline-danger">
+					<button
+						type="button"
+						className="btn btn-outline-danger"
+						onClick={handleDelete}
+					>
 						<i className="far fa-trash-alt" />
-					</a>
+					</button>
 				</div>
 			</td>
 		</tr>
