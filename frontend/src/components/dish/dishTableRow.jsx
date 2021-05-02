@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { useDish } from 'hooks';
 
 function DishTableRow({ item }) {
@@ -12,6 +13,8 @@ function DishTableRow({ item }) {
 		}
 	};
 
+	const url = `/dish/${id}`;
+
 	return (
 		<tr>
 			<th scope="row">{id}</th>
@@ -19,9 +22,9 @@ function DishTableRow({ item }) {
 			<td>{tags}</td>
 			<td>
 				<div className="btn-group">
-					<button type="button" className="btn btn-outline-success">
+					<Link to={url} className="btn btn-outline-success">
 						<i className="far fa-eye" />
-					</button>
+					</Link>
 					<a href="/" className="btn btn-outline-primary">
 						<i className="far fa-edit" />
 					</a>

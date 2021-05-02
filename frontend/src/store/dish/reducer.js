@@ -3,6 +3,9 @@ import * as TYPE from './types';
 export const initialState = {
 	error: '',
 	items: [],
+	details: {
+		name: '',
+	},
 	isLoading: false,
 	redirectTo: '',
 };
@@ -27,6 +30,12 @@ export default (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				items: action.payload,
+			};
+		case TYPE.GETBYID:
+			return {
+				...state,
+				isLoading: false,
+				details: action.payload,
 			};
 		case TYPE.ADD:
 			return {

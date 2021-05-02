@@ -14,6 +14,13 @@ function get(items) {
 	};
 }
 
+function getById(item) {
+	return {
+		type: TYPE.GETBYID,
+		payload: item,
+	};
+}
+
 function add(item, redirectTo) {
 	return {
 		type: TYPE.ADD,
@@ -48,6 +55,19 @@ export function handleGet() {
 		try {
 			const { data } = await apiRequest('/api/dish', 'GET', {}, {});
 			dispatch(get(data));
+		} catch (e) {
+			dispatch(error(e.response.data));
+		}
+	};
+}
+
+export function handleGetById(id) {
+	return async (dispatch) => {
+		dispatch(loading());
+
+		try {
+			const { data } = await apiRequest(`/api/dish/${id}`, 'GET', {}, {});
+			dispatch(getById(data));
 		} catch (e) {
 			dispatch(error(e.response.data));
 		}
