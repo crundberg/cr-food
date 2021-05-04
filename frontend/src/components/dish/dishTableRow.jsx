@@ -13,7 +13,8 @@ function DishTableRow({ item }) {
 		}
 	};
 
-	const url = `/dish/${id}`;
+	const urlView = `/dish/${id}`;
+	const urlEdit = `/dish/edit/${id}`;
 
 	return (
 		<tr>
@@ -22,12 +23,12 @@ function DishTableRow({ item }) {
 			<td>{tags}</td>
 			<td>
 				<div className="btn-group">
-					<Link to={url} className="btn btn-outline-success">
+					<Link to={urlView} className="btn btn-outline-success">
 						<i className="far fa-eye" />
 					</Link>
-					<a href="/" className="btn btn-outline-primary">
+					<Link to={urlEdit} className="btn btn-outline-primary">
 						<i className="far fa-edit" />
-					</a>
+					</Link>
 					<button
 						type="button"
 						className="btn btn-outline-danger"

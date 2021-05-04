@@ -40,7 +40,7 @@ module.exports = ({ app, dishService }) => {
 
 	// Update post
 	router.put('/:id(\\d+)', async (req, res) => {
-		const post = { ...req.body, id: req.params.id };
+		const post = { ...req.body, id: parseInt(req.params.id, 10) };
 		const results = await dishService.edit(post);
 
 		if (results.affectedRows < 1) {

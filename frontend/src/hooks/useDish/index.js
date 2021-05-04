@@ -11,7 +11,13 @@ const useDish = () => {
 	const { items, error, details, isLoading, redirectTo } = state.dish;
 
 	// List of Actions
-	const { handleGet, handleGetById, handleAdd, handleRemove } = actions;
+	const {
+		handleGet,
+		handleGetById,
+		handleAdd,
+		handleEdit,
+		handleRemove,
+	} = actions;
 
 	// Bind Actions
 	const boundActions = bindActions(
@@ -19,6 +25,7 @@ const useDish = () => {
 			handleGet,
 			handleGetById,
 			handleAdd,
+			handleEdit,
 			handleRemove,
 		},
 		dispatch
